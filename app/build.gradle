@@ -39,4 +39,8 @@ dependencies {
     compile 'com.android.support:design:25.1.1'
     //SwipeMenuItem
     compile 'com.github.Brioal:SwipeMenuItemProject:1.0'
+    //标签显示
+    compile 'com.github.Brioal:Label-master:1.3'
+    //指纹识别
+    compile 'com.github.pro100svitlo:fingerprintAuthHelper:1.2.1'
 }

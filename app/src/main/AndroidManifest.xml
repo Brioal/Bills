@@ -34,7 +34,9 @@
             android:name=".asset.AssetManagerActivity"
             android:theme="@style/BillTheme.NoActionBar">
         </activity>
-        <activity android:name=".add.ExAddActivity">
+        <activity
+            android:name=".add.ExAddActivity"
+            android:theme="@style/BillTheme.NoActionBar">
         </activity>
     </application>
 

@@ -5,6 +5,7 @@ import android.content.Context;
 import com.brioal.bills.bean.AssetBean;
 import com.brioal.bills.bean.ExchaBean;
 import com.brioal.bills.bean.ExchaType;
+import com.brioal.bills.interfaces.OnNormalOperatListener;
 
 import java.util.List;
 
@@ -40,6 +41,15 @@ public class MainContract {
         //显示详细
         void showDetail(List<ExchaBean> list);
 
+        //显示正在删除
+        void showDeleting();
+
+        //显示删除成功
+        void showDeleteDone();
+
+        //显示删除失败
+        void showDeleteFailed();
+
 
     }
 
@@ -49,6 +59,8 @@ public class MainContract {
         void refresh();//刷新
 
         void showMore();//加载更多
+
+        void delete(ExchaBean bean);//删除
 
 
     }
@@ -60,6 +72,8 @@ public class MainContract {
         //加载所有资金记录
         void loadExcha(Context context, int startIndex, int countIndex, OnExchaBeanLoadListener loadListener);
 
+        //删除记录
+        void deleteExcha(ExchaBean bean, OnNormalOperatListener listener);
 
     }
 

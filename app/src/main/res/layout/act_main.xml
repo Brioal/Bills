@@ -7,6 +7,105 @@
     android:layout_height="match_parent"
     tools:context="com.brioal.bills.main.MainActivity">
 
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary">
+        <!--总数-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:paddingBottom="5dp"
+            >
+
+            <TextView
+                android:id="@+id/main_tv_all"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="0.00"
+                android:textColor="@color/colorGreen"
+                android:textSize="32sp"/>
+
+            <ImageButton
+                android:id="@+id/main_btn_detail"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginBottom="15dp"
+                android:layout_marginRight="5dp"
+                android:background="@android:color/transparent"
+                android:src="@drawable/ic_detail"/>
+        </RelativeLayout>
+        <!--分割线-->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_margin="5dp"
+            android:background="@android:color/white"
+            app:layout_scrollFlags="enterAlways|scroll"/>
+        <!--收入和支出-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="5dp"
+            >
+
+            <TextView
+                android:id="@+id/main_tv_in"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="left|center_vertical"
+                android:paddingLeft="5dp"
+                android:text="+0.00"
+                android:textColor="@color/colorGreen"
+                android:textSize="16sp"/>
+
+            <View
+                android:layout_width="0.5dp"
+                android:layout_height="match_parent"
+                android:background="@android:color/white"/>
+
+            <TextView
+                android:id="@+id/main_tv_out"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="right|center_vertical"
+                android:paddingRight="5dp"
+                android:text="-0.00"
+                android:textColor="@color/colorRed"
+                android:textSize="16sp"/>
+
+        </LinearLayout>
+        <!--分割线-->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_margin="5dp"
+            android:background="@android:color/white"/>
+        <!--盈亏-->
+        <TextView
+            android:id="@+id/main_tv_sum"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:gravity="center|center_vertical"
+            android:paddingLeft="5dp"
+            android:text="+0.00"
+            android:textColor="@color/colorGreen"
+            android:textSize="16sp"/>
+
+    </android.support.design.widget.AppBarLayout>
+
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/main_refreshlayout"
         android:layout_width="match_parent"
@@ -31,104 +130,8 @@
         android:layout_gravity="right|bottom"
         android:layout_margin="16dp"
         android:src="@drawable/ic_add"
-        app:fabSize="normal"/>
+        app:fabSize="normal"
+        />
 
-    <android.support.design.widget.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/colorPrimary">
-        <!--总数-->
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:paddingBottom="5dp"
-            app:layout_scrollFlags="enterAlways|scroll">
 
-            <TextView
-                android:id="@+id/main_tv_all"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginTop="5dp"
-                android:gravity="center"
-                android:padding="5dp"
-                android:text="0.00"
-                android:textColor="@color/colorGreen"
-                android:textSize="32sp"/>
-
-            <ImageButton
-                android:id="@+id/main_btn_detail"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentRight="true"
-                android:layout_marginBottom="15dp"
-                android:layout_marginRight="5dp"
-                android:background="@android:color/transparent"
-                android:src="@drawable/ic_detail"/>
-        </RelativeLayout>
-        <!--分割线-->
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0.5dp"
-            android:layout_margin="5dp"
-            android:background="@android:color/white"/>
-        <!--收入和支出-->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="5dp">
-
-            <TextView
-                android:id="@+id/main_tv_in"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="left|center_vertical"
-                android:paddingLeft="5dp"
-                android:text="+0.00"
-                android:textColor="@color/colorGreen"
-                android:textSize="23sp"/>
-
-            <View
-                android:layout_width="0.5dp"
-                android:layout_height="match_parent"
-                android:background="@android:color/white"/>
-
-            <TextView
-                android:id="@+id/main_tv_out"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="right|center_vertical"
-                android:paddingRight="5dp"
-                android:text="-0.00"
-                android:textColor="@color/colorRed"
-                android:textSize="23sp"/>
-
-        </LinearLayout>
-        <!--分割线-->
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0.5dp"
-            android:layout_margin="5dp"
-            android:background="@android:color/white"/>
-        <!--盈亏-->
-        <TextView
-            android:id="@+id/main_tv_sum"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="5dp"
-            android:layout_weight="1"
-            android:gravity="center|center_vertical"
-            android:paddingLeft="5dp"
-            android:text="+0.00"
-            android:textColor="@color/colorGreen"
-            android:textSize="26sp"/>
-
-    </android.support.design.widget.AppBarLayout>
 </android.support.design.widget.CoordinatorLayout>

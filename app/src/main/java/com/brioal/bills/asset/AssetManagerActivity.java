@@ -132,6 +132,7 @@ public class AssetManagerActivity extends BaseActivity implements AssetContract.
                 showDeleteNotice(bean);
             }
         });
+        mRecyclerView.addItemDecoration(new WhiteDividerDecoration(mContext));
         mRecyclerView.setLayoutManager(new LinearLayoutManager(mContext));
         mRecyclerView.setAdapter(mAdapter);
     }
@@ -289,5 +290,11 @@ public class AssetManagerActivity extends BaseActivity implements AssetContract.
         });
         AlertDialog dialog = configDialog.create();
         dialog.show();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        setResult(RESULT_OK);
     }
 }

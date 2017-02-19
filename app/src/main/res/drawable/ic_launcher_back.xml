@@ -2,14 +2,14 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android"
 
     >
+
     <item
-        android:width="720dp"
-        android:height="1280dp"
-        android:drawable="@drawable/ic_launcher_bg"/>
-    <item
-        android:width="720dp"
-        android:height="510dp"
-        android:drawable="@mipmap/ic_launcher_logo"
+        android:drawable="@drawable/ic_launcher_bg"
         android:gravity="center"/>
+    <item>
+        <bitmap
+            android:gravity="center"
+            android:src="@mipmap/ic_launcher_logo"/>
+    </item>
 
 </layer-list>

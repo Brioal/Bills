@@ -1,21 +1,25 @@
 package com.brioal.bills.main.presenter;
+
 import android.os.Handler;
 
 import com.brioal.bills.bean.AssetBean;
 import com.brioal.bills.bean.ExchaBean;
+import com.brioal.bills.interfaces.OnNormalOperatListener;
 import com.brioal.bills.main.contract.MainContract;
 import com.brioal.bills.main.model.MainModelImpl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
-* Created by Brioal on 2017/02/10
-*/
+ * Created by Brioal on 2017/02/10
+ */
 
-public class MainPresenterImpl implements MainContract.Presenter{
+public class MainPresenterImpl implements MainContract.Presenter {
     private MainContract.View mView;
     private MainContract.Model mModel;
     private Handler mHandler = new Handler();
+    private ArrayList<AssetBean> mAssetBeens;
 
     public MainPresenterImpl(MainContract.View view) {
         mView = view;
@@ -47,7 +51,7 @@ public class MainPresenterImpl implements MainContract.Presenter{
                         mView.showAll(finalSum);
                     }
                 });
-
+                mAssetBeens = (ArrayList<AssetBean>) list;
             }
 
             @Override
@@ -72,10 +76,10 @@ public class MainPresenterImpl implements MainContract.Presenter{
                     if (!list.get(i).getExchaType().isOut()) {
                         in += list.get(i).getMoney();
                     } else {
-                        out -= list.get(i).getMoney();
+                        out += list.get(i).getMoney();
                     }
                 }
-                sum = in + out;
+                sum = in - out;
                 final float finalIn = in;
                 final float finalOut = out;
                 final float finalSum = sum;
@@ -111,5 +115,40 @@ public class MainPresenterImpl implements MainContract.Presenter{
     @Override
     public void showMore() {
         // TODO: 2017/2/10  加载更多
+    }
+
+    @Override
+    public void delete(ExchaBean bean) {
+        mHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                mView.showDeleting();
+            }
+        });
+        mModel.deleteExcha(bean, new OnNormalOperatListener() {
+            @Override
+            public void success(String msg) {
+                mHandler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        mView.showDeleteDone();
+                    }
+                });
+            }
+
+            @Override
+            public void failed(String errorMsg) {
+                mHandler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        mView.showDeleteFailed();
+                    }
+                });
+            }
+        });
+    }
+
+    public ArrayList<AssetBean> getAssets() {
+        return mAssetBeens;
     }
 }

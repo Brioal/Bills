@@ -7,11 +7,15 @@ import android.widget.EditText;
 
 import com.brioal.bills.base.BaseActivity;
 import com.brioal.bills.main.MainActivity;
+import com.pro100svitlo.fingerprintAuthHelper.FahListener;
+import com.pro100svitlo.fingerprintAuthHelper.FingerprintAuthHelper;
+
+import org.jetbrains.annotations.Nullable;
 
 import cn.bmob.v3.Bmob;
 
-public class LauncherActivity extends BaseActivity {
-
+public class LauncherActivity extends BaseActivity implements FahListener {
+    private FingerprintAuthHelper mFAH;
     EditText mEtPass;
     private String mAPPID = "a5a74024cbf7473ff29afeb5cb5a7224";
     private final int mPermissionCode = 0;
@@ -24,6 +28,15 @@ public class LauncherActivity extends BaseActivity {
         mEtPass = (EditText) findViewById(R.id.launcher_et_pass);
         initView();
         initSDK();
+        mFAH = new FingerprintAuthHelper
+                .Builder(this, this) //(Context inscance of Activity, FahListener)
+                .build();
+
+        if (mFAH.isHardwareEnable()) {
+            //do some stuff here
+        } else {
+            //otherwise do
+        }
         //MPermissions.requestPermissions(LauncherActivity.this, mPermissionCode,  Manifest.permission.WRITE_EXTERNAL_STORAGE);
     }
 
@@ -55,4 +68,37 @@ public class LauncherActivity extends BaseActivity {
             }
         });
     }
+
+    @Override
+    public void onFingerprintStatus(boolean b, int i, @Nullable CharSequence charSequence) {
+        if (b) {
+            MainActivity.enterMain(mContext);
+            finish();
+        }
+    }
+
+    @Override
+    public void onFingerprintListening(boolean b, long l) {
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mFAH.startListening();
+    }
+
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        mFAH.stopListening();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mFAH.onDestroy();
+    }
+
 }

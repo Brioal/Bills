@@ -3,7 +3,6 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="0.5dp"
     android:background="@color/colorPrimary"
     android:orientation="vertical"
     >
@@ -13,6 +12,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:padding="5dp">
+
 
         <TextView
             android:id="@+id/item_tv_money"
@@ -55,6 +55,7 @@
                 android:textSize="18sp"/>
         </LinearLayout>
     </LinearLayout>
+
     <!--菜单界面-->
     <LinearLayout
         android:layout_width="wrap_content"

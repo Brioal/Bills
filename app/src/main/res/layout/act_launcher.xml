@@ -15,7 +15,6 @@
         android:layout_margin="15dp"
         android:background="@drawable/launcher_et_bg"
         android:hint="请输入密码"
-        android:imeOptions="actionDone"
         android:inputType="numberPassword"
         android:padding="13dp"
         android:textSize="18sp"/>

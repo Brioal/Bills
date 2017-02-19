@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.brioal.bills.bean.AssetBean;
 import com.brioal.bills.bean.ExchaBean;
+import com.brioal.bills.interfaces.OnNormalOperatListener;
 import com.brioal.bills.main.contract.MainContract;
 
 import java.util.List;
@@ -11,6 +12,7 @@ import java.util.List;
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.FindListener;
+import cn.bmob.v3.listener.UpdateListener;
 
 /**
  * Created by Brioal on 2017/02/10
@@ -54,6 +56,7 @@ public class MainModelImpl implements MainContract.Model {
         query.setSkip(startIndex);
         query.setLimit(countIndex);
         query.order("createdAt");
+        query.include("mExchaType,mAsset");// 希望在查询帖子信息的同时也把发布人的信息查询出来
         query.findObjects(new FindListener<ExchaBean>() {
             @Override
             public void done(List<ExchaBean> list, BmobException e) {
@@ -73,6 +76,38 @@ public class MainModelImpl implements MainContract.Model {
                     return;
                 }
                 loadListener.success(list);
+            }
+        });
+    }
+
+    @Override
+    public void deleteExcha(final ExchaBean bean, final OnNormalOperatListener listener) {
+        bean.delete(bean.getObjectId(), new UpdateListener() {
+            @Override
+            public void done(BmobException e) {
+                if (e == null) {
+                    AssetBean assetBean = bean.getAsset();
+                    //删除成功,回滚数据
+                    if (bean.getExchaType().isOut()) {
+                        //支出
+                        assetBean.setMoney(assetBean.getMoney() + bean.getMoney());
+                    } else {
+                        //收入
+                        assetBean.setMoney(assetBean.getMoney() - bean.getMoney());
+                    }
+                    assetBean.update(assetBean.getObjectId(), new UpdateListener() {
+                        @Override
+                        public void done(BmobException e) {
+                            if (e == null) {
+                                if (listener != null) {
+                                    listener.success("");
+                                    return;
+                                }
+                            }
+                            listener.failed("");
+                        }
+                    });
+                }
             }
         });
     }
