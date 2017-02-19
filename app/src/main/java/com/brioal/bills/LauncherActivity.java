@@ -1,14 +1,12 @@
 package com.brioal.bills;
 
 import android.os.Bundle;
-import android.view.KeyEvent;
-import android.view.inputmethod.EditorInfo;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import com.brioal.bills.base.BaseActivity;
 import com.brioal.bills.main.MainActivity;
-import com.zhy.m.permission.MPermissions;
 
 import cn.bmob.v3.Bmob;
 
@@ -36,30 +34,25 @@ public class LauncherActivity extends BaseActivity {
 
 
     private void initView() {
-        mEtPass.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+        mEtPass.addTextChangedListener(new TextWatcher() {
             @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                String pass = v.getText().toString();
-                if (actionId == EditorInfo.IME_ACTION_DONE) {
-                    if (pass.isEmpty()) {
-                        showToast("密码不能为空");
-                    } else if (pass.equals("0105")) {
-                        MainActivity.enterMain(mContext);
-                        finish();
-                    } else {
-                        showToast("密码输入错误，请重新输入");
-                    }
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                String pass = s.toString();
+                if (pass.equals("0105")) {
+                    MainActivity.enterMain(mContext);
+                    finish();
                 }
-                return true;
             }
         });
     }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-        MPermissions.onRequestPermissionsResult(this, requestCode, permissions, grantResults);
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-    }
-
-
 }

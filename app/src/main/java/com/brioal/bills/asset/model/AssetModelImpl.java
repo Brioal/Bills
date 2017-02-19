@@ -69,6 +69,7 @@ public class AssetModelImpl implements AssetContract.Model {
     @Override
     public void deleteAsset(AssetBean bean, final OnOperatorListener listener) {
         //删除资产
+        bean.setObjectId(bean.getObjectId());
         bean.delete(new UpdateListener() {
             @Override
             public void done(BmobException e) {
@@ -86,7 +87,10 @@ public class AssetModelImpl implements AssetContract.Model {
     @Override
     public void changeAsset(AssetBean bean, final OnOperatorListener listener) {
         //修改资产
-        bean.update(new UpdateListener() {
+        AssetBean bean1 = new AssetBean();
+        bean1.setName(bean.getName());
+        bean1.setMoney(bean.getMoney());
+        bean1.update(bean.getObjectId(), new UpdateListener() {
             @Override
             public void done(BmobException e) {
                 if (listener == null) {

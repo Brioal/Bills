@@ -30,7 +30,11 @@
             android:name=".main.MainActivity"
             android:theme="@style/BillTheme.NoActionBar">
         </activity>
-        <activity android:name=".asset.AssetManagerActivity">
+        <activity
+            android:name=".asset.AssetManagerActivity"
+            android:theme="@style/BillTheme.NoActionBar">
+        </activity>
+        <activity android:name=".add.ExAddActivity">
         </activity>
     </application>
 

@@ -18,11 +18,17 @@ public class AssetContract {
 
         void showLoadDone();//显示加载完成
 
-        void showLoadFailed();//显示加载失败
+        void showLoadFailed(String errorMsg);//显示加载失败
 
         void showAssets(List<AssetBean> list);//显示资产
 
         void showAllCount(float allCount);//显示所有资产总和
+
+        void showChanging();//显示正在更改
+
+        void showChangeSuccess();//显示更改成功
+
+        void showChangeFailed(String error);//显示更改失败
     }
 
     public interface Presenter {
@@ -35,7 +41,6 @@ public class AssetContract {
         void deleteAsset(AssetBean bean);//删除资产
 
         void changeAsset(AssetBean bean);//修改Asset
-
 
     }
 

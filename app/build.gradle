@@ -1,5 +1,4 @@
 apply plugin: 'com.android.application'
-apply plugin: 'com.neenbedankt.android-apt'
 
 
 android {
@@ -34,9 +33,6 @@ dependencies {
     //Bmob
     compile 'cn.bmob.android:bmob-sdk:3.5.0'
     compile 'cn.bmob.android:http-legacy:1.0'
-    //6.0权限处理
-    apt 'com.zhy:mpermission-compiler:1.0.0'
-    compile 'com.zhy:mpermission-api:1.0.0'
     //Klog
     compile 'com.github.zhaokaiqiang.klog:library:1.6.0'
     //Design

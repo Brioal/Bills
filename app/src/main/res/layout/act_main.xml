@@ -7,6 +7,32 @@
     android:layout_height="match_parent"
     tools:context="com.brioal.bills.main.MainActivity">
 
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/main_refreshlayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/main_recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorLightWhite"
+            >
+
+        </android.support.v7.widget.RecyclerView>
+
+    </android.support.v4.widget.SwipeRefreshLayout>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/main_btn_add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right|bottom"
+        android:layout_margin="16dp"
+        android:src="@drawable/ic_add"
+        app:fabSize="normal"/>
+
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -29,7 +55,7 @@
                 android:layout_marginTop="5dp"
                 android:gravity="center"
                 android:padding="5dp"
-                android:text="100,100.00"
+                android:text="0.00"
                 android:textColor="@color/colorGreen"
                 android:textSize="32sp"/>
 
@@ -64,7 +90,7 @@
                 android:layout_weight="1"
                 android:gravity="left|center_vertical"
                 android:paddingLeft="5dp"
-                android:text="+100.00"
+                android:text="+0.00"
                 android:textColor="@color/colorGreen"
                 android:textSize="23sp"/>
 
@@ -80,7 +106,7 @@
                 android:layout_weight="1"
                 android:gravity="right|center_vertical"
                 android:paddingRight="5dp"
-                android:text="-100.00"
+                android:text="-0.00"
                 android:textColor="@color/colorRed"
                 android:textSize="23sp"/>
 
@@ -100,35 +126,9 @@
             android:layout_weight="1"
             android:gravity="center|center_vertical"
             android:paddingLeft="5dp"
-            android:text="+100.00"
+            android:text="+0.00"
             android:textColor="@color/colorGreen"
             android:textSize="26sp"/>
 
     </android.support.design.widget.AppBarLayout>
-
-    <android.support.v4.widget.SwipeRefreshLayout
-        android:id="@+id/main_refreshlayout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/main_recyclerview"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/colorLightWhite"
-            >
-
-        </android.support.v7.widget.RecyclerView>
-
-    </android.support.v4.widget.SwipeRefreshLayout>
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/main_btn_add"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="right|bottom"
-        android:layout_margin="16dp"
-        android:src="@drawable/ic_add"
-        app:fabSize="normal"/>
 </android.support.design.widget.CoordinatorLayout>
