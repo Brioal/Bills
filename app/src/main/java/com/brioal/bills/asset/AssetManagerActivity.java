@@ -1,9 +1,7 @@
 package com.brioal.bills.asset;
 
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -28,6 +26,7 @@ import com.brioal.bills.asset.presenter.AssetPresenterImpl;
 import com.brioal.bills.base.BaseActivity;
 import com.brioal.bills.bean.AssetBean;
 import com.brioal.bills.interfaces.OnAssetItemListener;
+import com.brioal.bills.util.MoneyFormatUtil;
 
 import java.util.List;
 
@@ -141,7 +140,7 @@ public class AssetManagerActivity extends BaseActivity implements AssetContract.
     //显示资产总数
     @Override
     public void showAllCount(float allCount) {
-        mTvCount.setText(allCount + "");
+        mTvCount.setText(MoneyFormatUtil.getFormatMoney(allCount) + "");
     }
 
     @Override
@@ -177,10 +176,6 @@ public class AssetManagerActivity extends BaseActivity implements AssetContract.
         }
     }
 
-    public static void enterAssetManager(Context context) {
-        Intent intent = new Intent(context, AssetManagerActivity.class);
-        context.startActivity(intent);
-    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

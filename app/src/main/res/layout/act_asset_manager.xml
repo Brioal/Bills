@@ -34,7 +34,7 @@
             android:paddingTop="6dp"
             android:text="0.00"
             android:textColor="@color/colorGreen"
-            android:textSize="23sp"/>
+            android:textSize="33sp"/>
 
 
     </android.support.design.widget.AppBarLayout>

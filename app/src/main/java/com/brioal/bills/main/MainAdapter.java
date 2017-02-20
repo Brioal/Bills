@@ -11,6 +11,8 @@ import com.brioal.bills.R;
 import com.brioal.bills.base.BaseViewHolder;
 import com.brioal.bills.bean.ExchaBean;
 import com.brioal.bills.interfaces.OnExLongClickListener;
+import com.brioal.bills.util.DateUtils;
+import com.brioal.bills.util.MoneyFormatUtil;
 import com.socks.library.KLog;
 
 import java.util.ArrayList;
@@ -86,6 +88,10 @@ public class MainAdapter extends RecyclerView.Adapter<BaseViewHolder> {
         TextView mTvMoneyBefore;
         @BindView(R.id.ex_tv_in_money_after)
         TextView mTvMoneyAfter;
+        @BindView(R.id.ex_in_tv_time)
+        TextView mTvTime;
+        @BindView(R.id.ex_in_tv_desc)
+        TextView mTvDesc;
 
         public ExInViewHolder(View itemView) {
             super(itemView);
@@ -95,11 +101,13 @@ public class MainAdapter extends RecyclerView.Adapter<BaseViewHolder> {
         @Override
         public void bindView(List list, final int position) {
             final ExchaBean bean = mList.get(position);
-            mTvMoney.setText("+" + bean.getMoney());
+            mTvMoney.setText("+"+MoneyFormatUtil.getFormatMoney(bean.getMoney()));
             mTvType.setText(bean.getExchaType().getName());
             mTvAsset.setText(bean.getAsset().getName());
-            mTvMoneyBefore.setText((bean.getAsset().getMoney() - bean.getMoney()) + "");
-            mTvMoneyAfter.setText(bean.getAsset().getMoney() + "");
+            mTvMoneyBefore.setText(MoneyFormatUtil.getFormatMoney((bean.getAsset().getMoney() - bean.getMoney())));
+            mTvMoneyAfter.setText(MoneyFormatUtil.getFormatMoney(bean.getAsset().getMoney()));
+            mTvTime.setText(DateUtils.convertTime(bean.getCreatedAt()));
+            mTvDesc.setText(bean.getDesc());
             if (mLongClickListener != null) {
                 itemView.setOnLongClickListener(new View.OnLongClickListener() {
                     @Override
@@ -115,7 +123,7 @@ public class MainAdapter extends RecyclerView.Adapter<BaseViewHolder> {
     //支出ViewHolder
     class ExOutViewHolder extends BaseViewHolder {
 
-        @BindView(R.id.ex_out_money)
+        @BindView(R.id.ex_out_tv_money)
         TextView mTvMoney;
         @BindView(R.id.ex_out_tv_type)
         TextView mTvType;
@@ -125,6 +133,11 @@ public class MainAdapter extends RecyclerView.Adapter<BaseViewHolder> {
         TextView mTvMoneyBefore;
         @BindView(R.id.ex_tv_out_money_after)
         TextView mTvMoneyAfter;
+        @BindView(R.id.ex_out_tv_time)
+        TextView mTvTime;
+        @BindView(R.id.ex_out_tv_desc)
+        TextView mTvDesc;
+
 
         public ExOutViewHolder(View itemView) {
             super(itemView);
@@ -134,11 +147,13 @@ public class MainAdapter extends RecyclerView.Adapter<BaseViewHolder> {
         @Override
         public void bindView(List list, final int position) {
             final ExchaBean bean = mList.get(position);
-            mTvMoney.setText("-" + bean.getMoney());
+            mTvMoney.setText("-" + MoneyFormatUtil.getFormatMoney(bean.getMoney()));
             mTvType.setText(bean.getExchaType().getName());
             mTvAsset.setText(bean.getAsset().getName());
-            mTvMoneyBefore.setText((bean.getAsset().getMoney() + bean.getMoney()) + "");
-            mTvMoneyAfter.setText(bean.getAsset().getMoney() + "");
+            mTvMoneyBefore.setText(MoneyFormatUtil.getFormatMoney((bean.getAsset().getMoney() + bean.getMoney())) + "");
+            mTvDesc.setText(bean.getDesc());
+            mTvTime.setText(DateUtils.convertTime(bean.getCreatedAt()));
+            mTvMoneyAfter.setText(MoneyFormatUtil.getFormatMoney(bean.getAsset().getMoney()) + "");
             if (mLongClickListener != null) {
                 itemView.setOnLongClickListener(new View.OnLongClickListener() {
                     @Override

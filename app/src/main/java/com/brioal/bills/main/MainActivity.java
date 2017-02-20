@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
@@ -24,6 +23,7 @@ import com.brioal.bills.bean.ExchaBean;
 import com.brioal.bills.interfaces.OnExLongClickListener;
 import com.brioal.bills.main.contract.MainContract;
 import com.brioal.bills.main.presenter.MainPresenterImpl;
+import com.brioal.bills.util.MoneyFormatUtil;
 
 import java.util.List;
 
@@ -48,7 +48,7 @@ public class MainActivity extends BaseActivity implements MainContract.View {
     @BindView(R.id.main_refreshlayout)
     SwipeRefreshLayout mRefreshlayout;
     @BindView(R.id.main_btn_add)
-    FloatingActionButton mBtnAdd;
+    ImageButton mBtnAdd;
 
     private Handler mHandler = new Handler();
     private MainPresenterImpl mPresenter;
@@ -139,17 +139,17 @@ public class MainActivity extends BaseActivity implements MainContract.View {
 
     @Override
     public void showAll(float allMoney) {
-        mTvAll.setText(allMoney + "");
+        mTvAll.setText(MoneyFormatUtil.getFormatMoney(allMoney) + "");
     }
 
     @Override
     public void showOut(float outMoney) {
-        mTvOut.setText("-" + outMoney);
+        mTvOut.setText("-" + MoneyFormatUtil.getFormatMoney(outMoney));
     }
 
     @Override
     public void showIn(float inMoney) {
-        mTvIn.setText("+" + inMoney + "");
+        mTvIn.setText("+" + MoneyFormatUtil.getFormatMoney(inMoney) + "");
     }
 
     @Override
@@ -158,8 +158,11 @@ public class MainActivity extends BaseActivity implements MainContract.View {
         StringBuffer buffer = new StringBuffer();
         if (sumMoney >= 0) {
             buffer.append("+");
+            mTvSum.setTextColor(getResources().getColor(R.color.colorGreen));
+        } else {
+            mTvSum.setTextColor(getResources().getColor(R.color.colorRed));
         }
-        buffer.append(sumMoney);
+        buffer.append(MoneyFormatUtil.getFormatMoney(sumMoney));
         mTvSum.setText(buffer.toString() + "");
     }
 

@@ -11,6 +11,7 @@ import com.brioal.bills.R;
 import com.brioal.bills.base.BaseViewHolder;
 import com.brioal.bills.bean.AssetBean;
 import com.brioal.bills.interfaces.OnAssetItemListener;
+import com.brioal.bills.util.MoneyFormatUtil;
 import com.brioal.swipemenuitem.OnMenuItemClickListener;
 import com.brioal.swipemenuitem.SwipeMenuItemView;
 
@@ -82,7 +83,7 @@ public class AssetAdapter extends RecyclerView.Adapter<BaseViewHolder> {
         @Override
         public void bindView(List list, final int position) {
             final AssetBean bean = (AssetBean) list.get(position);
-            mTvMoney.setText(bean.getMoney() + "");
+            mTvMoney.setText(MoneyFormatUtil.getFormatMoney(bean.getMoney()));
             mTvName.setText(bean.getName());
             mTvTime.setText(bean.getUpdatedAt());
             if (mItemListener == null) {
