@@ -25,13 +25,14 @@ import com.brioal.bills.asset.contract.AssetContract;
 import com.brioal.bills.asset.presenter.AssetPresenterImpl;
 import com.brioal.bills.base.BaseActivity;
 import com.brioal.bills.bean.AssetBean;
-import com.brioal.bills.interfaces.OnAssetItemListener;
+import com.brioal.bills.interfaces.OnItemSwipeListener;
 import com.brioal.bills.util.MoneyFormatUtil;
 
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import cn.bmob.v3.BmobObject;
 
 public class AssetManagerActivity extends BaseActivity implements AssetContract.View {
 
@@ -120,15 +121,16 @@ public class AssetManagerActivity extends BaseActivity implements AssetContract.
     public void showAssets(List<AssetBean> list) {
         mAdapter = new AssetAdapter(mContext);
         mAdapter.showList(list);
-        mAdapter.setItemListener(new OnAssetItemListener() {
+        mAdapter.setItemListener(new OnItemSwipeListener() {
+
             @Override
-            public void change(AssetBean bean, int position) {
-                showEditDialog(bean);
+            public void change(BmobObject bean, int position) {
+                showEditDialog((AssetBean) bean);
             }
 
             @Override
-            public void delete(AssetBean bean, int position) {
-                showDeleteNotice(bean);
+            public void delete(BmobObject bean, int position) {
+                showDeleteNotice((AssetBean) bean);
             }
         });
         mRecyclerView.addItemDecoration(new WhiteDividerDecoration(mContext));

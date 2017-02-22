@@ -1,6 +1,7 @@
 package com.brioal.bills.add;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
@@ -20,6 +21,7 @@ import com.brioal.bills.base.BaseActivity;
 import com.brioal.bills.bean.AssetBean;
 import com.brioal.bills.bean.ExchaBean;
 import com.brioal.bills.bean.ExchaType;
+import com.brioal.bills.extype.ExTypeActivity;
 import com.brioal.labelview.LabelView;
 import com.brioal.labelview.entity.LabelEntity;
 import com.brioal.labelview.interfaces.OnLabelSelectedListener;
@@ -86,6 +88,10 @@ public class ExAddActivity extends BaseActivity implements AddContract.View {
             public void onClick(View v) {
                 float money = Float.parseFloat(mEtMoney.getText().toString());
                 String desc = mEtDesc.getText().toString();
+                if (mSelectedType == null || mAssetBean == null || money < 0) {
+                    showToast("请补全信息后重试");
+                    return;
+                }
                 ExchaBean bean = new ExchaBean();
                 bean.setMoney(money);
                 bean.setExchaType(mSelectedType);
@@ -130,6 +136,7 @@ public class ExAddActivity extends BaseActivity implements AddContract.View {
     //显示操作的类型
     @Override
     public void showExtype(final List<ExchaType> list) {
+        mSelectedType = null;
         if (list.get(0).isOut()) {
             //是支出
             mLabelType.setColorBGNormal(getResources().getColor(R.color.colorLightWhite));
@@ -164,7 +171,9 @@ public class ExAddActivity extends BaseActivity implements AddContract.View {
                 if (i != mLabelType.getChildCount() - 1) {
                     mSelectedType = list.get(i);
                 } else {
-                    // TODO: 2017/2/19 添加Type
+                    Intent intent = new Intent(mContext, ExTypeActivity.class);
+                    startActivityForResult(intent, 0);
+
                 }
             }
         });
@@ -214,5 +223,13 @@ public class ExAddActivity extends BaseActivity implements AddContract.View {
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 0) {
+            mPresenter.start();
+        }
     }
 }

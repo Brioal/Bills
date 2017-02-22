@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/layout_add_asset_layout_bg"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:orientation="vertical">
+    <!--标题栏-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:text="编辑类型"
+            android:textColor="@android:color/white"
+            android:textSize="22sp"/>
+
+        <ImageButton
+            android:id="@+id/layout_edit_type_btn_close"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="8dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/ic_close"/>
+    </RelativeLayout>
+
+
+    <EditText
+        android:id="@+id/layout_edit_type_et_name"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp"
+        android:hint="请输入名称"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp"
+        android:textColor="@color/colorGreen"
+        android:textColorHint="@color/colorLightWhite"/>
+
+    <Button
+        android:id="@+id/layout_edit_type_btn_add"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:background="@drawable/asset_add_btn_bg"
+        android:text="保存"
+        android:textColor="@color/colorPrimary"
+        android:textSize="20sp"/>
+
+
+</LinearLayout>

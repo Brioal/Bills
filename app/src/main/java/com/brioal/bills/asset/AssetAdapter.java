@@ -10,7 +10,7 @@ import android.widget.TextView;
 import com.brioal.bills.R;
 import com.brioal.bills.base.BaseViewHolder;
 import com.brioal.bills.bean.AssetBean;
-import com.brioal.bills.interfaces.OnAssetItemListener;
+import com.brioal.bills.interfaces.OnItemSwipeListener;
 import com.brioal.bills.util.MoneyFormatUtil;
 import com.brioal.swipemenuitem.OnMenuItemClickListener;
 import com.brioal.swipemenuitem.SwipeMenuItemView;
@@ -32,7 +32,7 @@ public class AssetAdapter extends RecyclerView.Adapter<BaseViewHolder> {
 
     private Context mContext;
     private List<AssetBean> mList = new ArrayList<>();
-    private OnAssetItemListener mItemListener;
+    private OnItemSwipeListener mItemListener;
 
     public AssetAdapter(Context context) {
         mContext = context;
@@ -44,7 +44,7 @@ public class AssetAdapter extends RecyclerView.Adapter<BaseViewHolder> {
     }
 
 
-    public void setItemListener(OnAssetItemListener itemListener) {
+    public void setItemListener(OnItemSwipeListener itemListener) {
         mItemListener = itemListener;
     }
 
