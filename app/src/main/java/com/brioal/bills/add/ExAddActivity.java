@@ -18,7 +18,6 @@ import com.brioal.bills.R;
 import com.brioal.bills.add.contract.AddContract;
 import com.brioal.bills.add.presenter.AddPresenterImpl;
 import com.brioal.bills.base.BaseActivity;
-import com.brioal.bills.bean.AssetBean;
 import com.brioal.bills.bean.ExchaBean;
 import com.brioal.bills.bean.ExchaType;
 import com.brioal.bills.extype.ExTypeActivity;
@@ -44,23 +43,18 @@ public class ExAddActivity extends BaseActivity implements AddContract.View {
     LabelView mLabelType;
     @BindView(R.id.ex_add_et_desb)
     EditText mEtDesc;
-    @BindView(R.id.ex_add_label_asset)
-    LabelView mLabelAsset;
     @BindView(R.id.ex_add_btn_commit)
     Button mBtnCommit;
 
-    private List<AssetBean> mAssets;
     private ProgressDialog mProgressDialog;
     private AddContract.Presenter mPresenter;
     private ExchaType mSelectedType;
-    private AssetBean mAssetBean;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_ex_add);
         ButterKnife.bind(this);
-        initData();
         initView();
         initPresenter();
     }
@@ -88,35 +82,15 @@ public class ExAddActivity extends BaseActivity implements AddContract.View {
             public void onClick(View v) {
                 float money = Float.parseFloat(mEtMoney.getText().toString());
                 String desc = mEtDesc.getText().toString();
-                if (mSelectedType == null || mAssetBean == null || money < 0) {
+                if (mSelectedType == null || money < 0) {
                     showToast("请补全信息后重试");
                     return;
                 }
                 ExchaBean bean = new ExchaBean();
                 bean.setMoney(money);
                 bean.setExchaType(mSelectedType);
-                bean.setAsset(mAssetBean);
                 bean.setDesc(desc);
                 mPresenter.addExt(bean);
-            }
-        });
-        if (mAssets == null) {
-            return;
-        }
-        List<LabelEntity> labels = new ArrayList<>();
-        for (int i = 0; i < mAssets.size(); i++) {
-            AssetBean bean = mAssets.get(i);
-            labels.add(new LabelEntity(bean.getName() + ":" + bean.getMoney(), ""));
-        }
-        mLabelAsset.setColorBGNormal(getResources().getColor(R.color.colorLightWhite));
-        mLabelAsset.setColorBGSelect(getResources().getColor(R.color.colorGreen));
-        mLabelAsset.setColorTextNormal(getResources().getColor(R.color.colorPrimary));
-        mLabelAsset.setColorTextSelect(getResources().getColor(R.color.colorPrimary));
-        mLabelAsset.setLabels(labels);
-        mLabelAsset.setListener(new OnLabelSelectedListener() {
-            @Override
-            public void selected(int i, String s) {
-                mAssetBean = mAssets.get(i);
             }
         });
         List<LabelEntity> type = new ArrayList<>();
@@ -129,9 +103,6 @@ public class ExAddActivity extends BaseActivity implements AddContract.View {
         mLabelType.setLabels(type);
     }
 
-    private void initData() {
-        mAssets = (List<AssetBean>) getIntent().getSerializableExtra("Asset");
-    }
 
     //显示操作的类型
     @Override

@@ -2,7 +2,6 @@ package com.brioal.bills.main.contract;
 
 import android.content.Context;
 
-import com.brioal.bills.bean.AssetBean;
 import com.brioal.bills.bean.ExchaBean;
 import com.brioal.bills.bean.ExchaType;
 import com.brioal.bills.interfaces.OnNormalOperatListener;
@@ -25,9 +24,6 @@ public class MainContract {
 
         //加载失败
         void loadFailed();
-
-        //显示总数
-        void showAll(float allMoney);
 
         //显示支出
         void showOut(float outMoney);
@@ -58,7 +54,6 @@ public class MainContract {
 
         void refresh();//刷新
 
-        void showMore();//加载更多
 
         void delete(ExchaBean bean);//删除
 
@@ -66,9 +61,6 @@ public class MainContract {
     }
 
     public interface Model {
-        //加载所有资产
-        void loadAsset(Context context, OnAssetLoadListener loadListener);
-
         //加载所有资金记录
         void loadExcha(Context context, int startIndex, int countIndex, OnExchaBeanLoadListener loadListener);
 
@@ -85,13 +77,6 @@ public class MainContract {
 
     }
 
-
-    //加载资产的监听器
-    public interface OnAssetLoadListener {
-        void success(List<AssetBean> list);
-
-        void failed(String msg);
-    }
 
     //加载资金操作记录的监听器
     public interface OnExchaBeanLoadListener {

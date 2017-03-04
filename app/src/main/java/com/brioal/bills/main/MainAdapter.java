@@ -82,12 +82,6 @@ public class MainAdapter extends RecyclerView.Adapter<BaseViewHolder> {
         TextView mTvMoney;
         @BindView(R.id.ex_in_tv_type)
         TextView mTvType;
-        @BindView(R.id.ex_in_tv_asset)
-        TextView mTvAsset;
-        @BindView(R.id.ex_tv_in_money_before)
-        TextView mTvMoneyBefore;
-        @BindView(R.id.ex_tv_in_money_after)
-        TextView mTvMoneyAfter;
         @BindView(R.id.ex_in_tv_time)
         TextView mTvTime;
         @BindView(R.id.ex_in_tv_desc)
@@ -101,11 +95,8 @@ public class MainAdapter extends RecyclerView.Adapter<BaseViewHolder> {
         @Override
         public void bindView(List list, final int position) {
             final ExchaBean bean = mList.get(position);
-            mTvMoney.setText("+"+MoneyFormatUtil.getFormatMoney(bean.getMoney()));
+            mTvMoney.setText("+" + MoneyFormatUtil.getFormatMoney(bean.getMoney()));
             mTvType.setText(bean.getExchaType().getName());
-            mTvAsset.setText(bean.getAsset().getName());
-            mTvMoneyBefore.setText(MoneyFormatUtil.getFormatMoney((bean.getAsset().getMoney() - bean.getMoney())));
-            mTvMoneyAfter.setText(MoneyFormatUtil.getFormatMoney(bean.getAsset().getMoney()));
             mTvTime.setText(DateUtils.convertTime(bean.getCreatedAt()));
             mTvDesc.setText(bean.getDesc());
             if (mLongClickListener != null) {
@@ -127,12 +118,6 @@ public class MainAdapter extends RecyclerView.Adapter<BaseViewHolder> {
         TextView mTvMoney;
         @BindView(R.id.ex_out_tv_type)
         TextView mTvType;
-        @BindView(R.id.ex_out_tv_asset)
-        TextView mTvAsset;
-        @BindView(R.id.ex_tv_out_money_before)
-        TextView mTvMoneyBefore;
-        @BindView(R.id.ex_tv_out_money_after)
-        TextView mTvMoneyAfter;
         @BindView(R.id.ex_out_tv_time)
         TextView mTvTime;
         @BindView(R.id.ex_out_tv_desc)
@@ -149,11 +134,8 @@ public class MainAdapter extends RecyclerView.Adapter<BaseViewHolder> {
             final ExchaBean bean = mList.get(position);
             mTvMoney.setText("-" + MoneyFormatUtil.getFormatMoney(bean.getMoney()));
             mTvType.setText(bean.getExchaType().getName());
-            mTvAsset.setText(bean.getAsset().getName());
-            mTvMoneyBefore.setText(MoneyFormatUtil.getFormatMoney((bean.getAsset().getMoney() + bean.getMoney())) + "");
             mTvDesc.setText(bean.getDesc());
             mTvTime.setText(DateUtils.convertTime(bean.getCreatedAt()));
-            mTvMoneyAfter.setText(MoneyFormatUtil.getFormatMoney(bean.getAsset().getMoney()) + "");
             if (mLongClickListener != null) {
                 itemView.setOnLongClickListener(new View.OnLongClickListener() {
                     @Override

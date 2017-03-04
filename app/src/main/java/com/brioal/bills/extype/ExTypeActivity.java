@@ -22,7 +22,6 @@ import android.widget.ImageButton;
 import android.widget.Switch;
 
 import com.brioal.bills.R;
-import com.brioal.bills.asset.WhiteDividerDecoration;
 import com.brioal.bills.base.BaseActivity;
 import com.brioal.bills.bean.ExchaType;
 import com.brioal.bills.extype.contract.ExtypeContract;
@@ -164,7 +163,6 @@ public class ExTypeActivity extends BaseActivity implements ExtypeContract.View 
                 showDeleteNotice((ExchaType) bean);
             }
         });
-        mRecyclerView.addItemDecoration(new WhiteDividerDecoration(mContext));
         mRecyclerView.setLayoutManager(new LinearLayoutManager(mContext));
         mRecyclerView.setAdapter(mExTypeAdapter);
     }
@@ -184,7 +182,6 @@ public class ExTypeActivity extends BaseActivity implements ExtypeContract.View 
                 showDeleteNotice((ExchaType) bean);
             }
         });
-        mRecyclerView.addItemDecoration(new WhiteDividerDecoration(mContext));
         mRecyclerView.setLayoutManager(new LinearLayoutManager(mContext));
         mRecyclerView.setAdapter(mExTypeAdapter);
     }

@@ -17,7 +17,6 @@ import android.widget.TextView;
 
 import com.brioal.bills.R;
 import com.brioal.bills.add.ExAddActivity;
-import com.brioal.bills.asset.AssetManagerActivity;
 import com.brioal.bills.base.BaseActivity;
 import com.brioal.bills.bean.ExchaBean;
 import com.brioal.bills.interfaces.OnExLongClickListener;
@@ -33,10 +32,6 @@ import butterknife.ButterKnife;
 public class MainActivity extends BaseActivity implements MainContract.View {
 
 
-    @BindView(R.id.main_tv_all)
-    TextView mTvAll;
-    @BindView(R.id.main_btn_detail)
-    ImageButton mBtnDetail;
     @BindView(R.id.main_tv_in)
     TextView mTvIn;
     @BindView(R.id.main_tv_out)
@@ -71,14 +66,6 @@ public class MainActivity extends BaseActivity implements MainContract.View {
     }
 
     private void initView() {
-        //跳转资金详情
-        mBtnDetail.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(mContext, AssetManagerActivity.class);
-                startActivityForResult(intent, 0);
-            }
-        });
         //初始化RefreshLayout
         mRefreshlayout.setColorSchemeColors(Color.BLACK, Color.GREEN, Color.BLUE, Color.RED);
         mRefreshlayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -91,7 +78,6 @@ public class MainActivity extends BaseActivity implements MainContract.View {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(mContext, ExAddActivity.class);
-                intent.putExtra("Asset", mPresenter.getAssets());
                 startActivityForResult(intent, 0);
             }
         });
@@ -137,10 +123,6 @@ public class MainActivity extends BaseActivity implements MainContract.View {
         showToast("加载数据失败，请稍后重试");
     }
 
-    @Override
-    public void showAll(float allMoney) {
-        mTvAll.setText(MoneyFormatUtil.getFormatMoney(allMoney) + "");
-    }
 
     @Override
     public void showOut(float outMoney) {

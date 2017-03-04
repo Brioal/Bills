@@ -14,16 +14,7 @@ public class ExchaBean extends BmobObject {
     private float mMoney;//金额
     private String mDesc;//备注
     private long mTime;//产生时间
-    private AssetBean mAsset;//影响的资产类型
 
-    public AssetBean getAsset() {
-        return mAsset;
-    }
-
-    public ExchaBean setAsset(AssetBean asset) {
-        mAsset = asset;
-        return this;
-    }
 
     public ExchaType getExchaType() {
         return mExchaType;

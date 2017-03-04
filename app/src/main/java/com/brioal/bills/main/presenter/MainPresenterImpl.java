@@ -2,13 +2,11 @@ package com.brioal.bills.main.presenter;
 
 import android.os.Handler;
 
-import com.brioal.bills.bean.AssetBean;
 import com.brioal.bills.bean.ExchaBean;
 import com.brioal.bills.interfaces.OnNormalOperatListener;
 import com.brioal.bills.main.contract.MainContract;
 import com.brioal.bills.main.model.MainModelImpl;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -19,7 +17,6 @@ public class MainPresenterImpl implements MainContract.Presenter {
     private MainContract.View mView;
     private MainContract.Model mModel;
     private Handler mHandler = new Handler();
-    private ArrayList<AssetBean> mAssetBeens;
 
     public MainPresenterImpl(MainContract.View view) {
         mView = view;
@@ -34,34 +31,6 @@ public class MainPresenterImpl implements MainContract.Presenter {
             @Override
             public void run() {
                 mView.showLoading();
-            }
-        });
-        //加载资金-》显示到所有资金
-        mModel.loadAsset(null, new MainContract.OnAssetLoadListener() {
-            @Override
-            public void success(List<AssetBean> list) {
-                float all = 0;
-                for (int i = 0; i < list.size(); i++) {
-                    all += list.get(i).getMoney();
-                }
-                final float finalSum = all;
-                mHandler.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        mView.showAll(finalSum);
-                    }
-                });
-                mAssetBeens = (ArrayList<AssetBean>) list;
-            }
-
-            @Override
-            public void failed(String msg) {
-                mHandler.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        mView.showAll(0.00f);
-                    }
-                });
             }
         });
         //加载所有的周转记录-》计算收入，计算支出，计算盈亏，->显示到记录
@@ -113,11 +82,6 @@ public class MainPresenterImpl implements MainContract.Presenter {
     }
 
     @Override
-    public void showMore() {
-        // TODO: 2017/2/10  加载更多
-    }
-
-    @Override
     public void delete(ExchaBean bean) {
         mHandler.post(new Runnable() {
             @Override
@@ -146,9 +110,5 @@ public class MainPresenterImpl implements MainContract.Presenter {
                 });
             }
         });
-    }
-
-    public ArrayList<AssetBean> getAssets() {
-        return mAssetBeens;
     }
 }
